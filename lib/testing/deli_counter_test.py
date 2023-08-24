@@ -80,3 +80,10 @@ class TestDeliCounter:
         assert(TestDeliCounter.OTHER_DELI == ["Avi", "Spencer"])
         TestDeliCounter.OTHER_DELI.insert(0, "Logan")
         
+    def test_now_serving_with_people_in_line(self):
+        '''serves the first person in line and removes them from the queue'''
+        captured_out = io.StringIO()
+        sys.stdout = captured_out
+        now_serving(TestDeliCounter.OTHER_DELI)
+        sys.stdout = sys.__stdout__
+        assert captured_out.getvalue() == "Now serving Logan.\n"  
